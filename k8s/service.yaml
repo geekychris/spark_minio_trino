@@ -29,10 +29,11 @@ metadata:
   labels:
     app: postgres
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
   - port: 5432
     targetPort: 5432
+    nodePort: 30432
     protocol: TCP
     name: postgres
   selector:
@@ -46,10 +47,11 @@ metadata:
   labels:
     app: hive-metastore
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
   - port: 9083
     targetPort: 9083
+    nodePort: 30083
     protocol: TCP
     name: thrift
   selector:
@@ -86,10 +88,11 @@ metadata:
   labels:
     app: spark-worker
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
   - port: 8081
     targetPort: 8081
+    nodePort: 30084
     protocol: TCP
     name: worker
   selector:

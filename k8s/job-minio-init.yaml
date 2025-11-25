@@ -1,0 +1,40 @@
+# MinIO Initialization Job
+# This Job creates the necessary buckets in MinIO for the lakehouse setup
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: minio-init
+  labels:
+    app: minio-init
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    metadata:
+      labels:
+        app: minio-init
+    spec:
+      restartPolicy: OnFailure
+      initContainers:
+      - name: wait-for-minio
+        image: curlimages/curl:latest
+        command:
+        - sh
+        - -c
+        - |
+          until curl -f http://minio:9000/minio/health/live; do
+            echo "Waiting for MinIO to be ready..."
+            sleep 5
+          done
+          echo "MinIO is ready!"
+      containers:
+      - name: mc
+        image: minio/mc:latest
+        command:
+        - sh
+        - -c
+        - |
+          /usr/bin/mc alias set myminio http://minio:9000 admin password123
+          /usr/bin/mc mb myminio/lakehouse || true
+          /usr/bin/mc mb myminio/warehouse || true
+          /usr/bin/mc mb myminio/iceberg || true
+          echo "MinIO buckets created successfully!"
