@@ -21,6 +21,40 @@ spec:
   selector:
     app: minio
 ---
+# PostgreSQL Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+    targetPort: 5432
+    protocol: TCP
+    name: postgres
+  selector:
+    app: postgres
+---
+# Hive Metastore Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: hive-metastore
+  labels:
+    app: hive-metastore
+spec:
+  type: ClusterIP
+  ports:
+  - port: 9083
+    targetPort: 9083
+    protocol: TCP
+    name: thrift
+  selector:
+    app: hive-metastore
+---
 # Spark Master Service
 apiVersion: v1
 kind: Service

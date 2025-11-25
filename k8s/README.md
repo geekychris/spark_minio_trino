@@ -9,6 +9,16 @@ This directory contains Kubernetes manifests for deploying the complete lakehous
 - **Console Port**: 9001 (NodePort: 30901)
 - **Credentials**: admin / password123
 
+### PostgreSQL (Metastore Database)
+- **Port**: 5432 (ClusterIP - internal only)
+- **Database**: metastore
+- **Credentials**: hive / hive
+
+### Hive Metastore Service (HMS)
+- **Thrift Port**: 9083 (ClusterIP - internal only)
+- Provides metadata management for Hive and Iceberg tables
+- Connected to PostgreSQL for persistence
+
 ### Spark Master
 - **Web UI Port**: 8080 (NodePort: 30082)
 - **Master Port**: 7077 (NodePort: 30077)
@@ -19,11 +29,16 @@ This directory contains Kubernetes manifests for deploying the complete lakehous
 
 ### Trino
 - **HTTP Port**: 8080 (NodePort: 30081)
+- **Catalogs**: hive (Parquet tables), iceberg (Iceberg tables)
 
 ## Deployment
 
 ### Deploy All Services
 ```bash
+# Apply ConfigMaps first (contains Trino and Hadoop configs)
+kubectl apply -f configmap.yaml
+
+# Deploy services
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 ```
@@ -33,6 +48,9 @@ kubectl apply -f service.yaml
 kubectl get deployments
 kubectl get services
 kubectl get pods
+
+# Wait for all pods to be ready (especially hive-metastore takes ~90s)
+kubectl wait --for=condition=ready pod -l app=hive-metastore --timeout=300s
 ```
 
 ## Access Services on Host Machine
@@ -62,11 +80,44 @@ Using the Trino CLI:
 trino --server localhost:30081
 ```
 
+### Query Iceberg Tables
+
+```sql
+-- Show available catalogs (hive and iceberg)
+SHOW CATALOGS;
+
+-- Parquet tables (Hive catalog)
+SHOW SCHEMAS IN hive;
+USE hive.ecommerce;
+SHOW TABLES;
+SELECT * FROM customers LIMIT 10;
+
+-- Iceberg tables
+SHOW SCHEMAS IN iceberg;
+USE iceberg.ecommerce;
+SHOW TABLES;
+SELECT * FROM customers LIMIT 10;
+
+-- Iceberg-specific features
+SELECT * FROM "orders$snapshots";  -- View snapshots
+SELECT * FROM "orders$history";     -- View history
+SELECT * FROM orders FOR VERSION AS OF <snapshot-id>;  -- Time travel
+```
+
 ## Resource Requirements
 
 ### MinIO
 - Requests: 512Mi memory, 250m CPU
 - Limits: 1Gi memory, 500m CPU
+
+### PostgreSQL
+- Requests: 512Mi memory, 250m CPU
+- Limits: 1Gi memory, 500m CPU
+
+### Hive Metastore
+- Requests: 1Gi memory, 500m CPU
+- Limits: 2Gi memory, 1000m CPU
+- Startup time: ~60-90 seconds
 
 ### Spark Master
 - Requests: 1Gi memory, 500m CPU
@@ -81,6 +132,10 @@ trino --server localhost:30081
 ### Trino
 - Requests: 2Gi memory, 1000m CPU
 - Limits: 4Gi memory, 2000m CPU
+
+**Total Cluster Requirements:**
+- ~8-10Gi memory minimum
+- ~4-5 CPU cores minimum
 
 ## Storage
 
@@ -109,9 +164,21 @@ kubectl delete -f deployment.yaml
 ### Check Pod Logs
 ```bash
 kubectl logs -f deployment/minio
+kubectl logs -f deployment/postgres
+kubectl logs -f deployment/hive-metastore
 kubectl logs -f deployment/spark-master
 kubectl logs -f deployment/spark-worker
 kubectl logs -f deployment/trino
+```
+
+### Hive Metastore Not Starting
+The HMS takes time to download JDBC drivers and initialize:
+```bash
+# Check init container logs
+kubectl logs <hive-metastore-pod> -c download-jdbc
+
+# Check if schema was initialized
+kubectl logs <hive-metastore-pod> | grep "Initialized schema"
 ```
 
 ### Check Pod Status

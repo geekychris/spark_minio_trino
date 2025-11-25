@@ -32,10 +32,60 @@ services:
       /usr/bin/mc alias set myminio http://minio:9000 admin password123;
       /usr/bin/mc mb myminio/lakehouse || true;
       /usr/bin/mc mb myminio/warehouse || true;
+      /usr/bin/mc mb myminio/iceberg || true;
       exit 0;
       "
     networks:
       - lakehouse-network
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=hive
+      - POSTGRES_PASSWORD=hive
+      - POSTGRES_DB=metastore
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - lakehouse-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hive"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  hive-metastore:
+    build:
+      context: .
+      dockerfile: Dockerfile.hive-metastore
+    container_name: hive-metastore
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    environment:
+      - SERVICE_NAME=metastore
+      - DB_DRIVER=postgres
+      - SERVICE_OPTS=-Djavax.jdo.option.ConnectionDriverName=org.postgresql.Driver -Djavax.jdo.option.ConnectionURL=jdbc:postgresql://postgres:5432/metastore -Djavax.jdo.option.ConnectionUserName=hive -Djavax.jdo.option.ConnectionPassword=hive
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=password123
+      - HADOOP_CONF_DIR=/etc/hadoop/conf
+    volumes:
+      - ./hive-conf:/etc/hadoop/conf:ro
+    ports:
+      - "9083:9083"
+    networks:
+      - lakehouse-network
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep -f HiveMetaStore || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 90s
 
   spark-master:
     image: apache/spark:3.5.0
@@ -82,13 +132,18 @@ services:
       - ./config:/etc/trino
       - ./catalog:/etc/trino/catalog
     depends_on:
-      - minio
+      hive-metastore:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
     networks:
       - lakehouse-network
     restart: unless-stopped
 
 volumes:
   minio-data:
+    driver: local
+  postgres-data:
     driver: local
 
 networks:

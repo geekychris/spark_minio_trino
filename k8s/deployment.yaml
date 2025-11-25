@@ -61,6 +61,162 @@ spec:
       - name: minio-data
         emptyDir: {}
 ---
+# PostgreSQL Deployment (for Hive Metastore)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        ports:
+        - containerPort: 5432
+          name: postgres
+          protocol: TCP
+        env:
+        - name: POSTGRES_USER
+          value: "hive"
+        - name: POSTGRES_PASSWORD
+          value: "hive"
+        - name: POSTGRES_DB
+          value: "metastore"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - hive
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - hive
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-data
+        emptyDir: {}
+---
+# Hive Metastore Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hive-metastore
+  labels:
+    app: hive-metastore
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hive-metastore
+  template:
+    metadata:
+      labels:
+        app: hive-metastore
+    spec:
+      initContainers:
+      - name: wait-for-postgres
+        image: postgres:15
+        command:
+        - sh
+        - -c
+        - |
+          until pg_isready -h postgres -p 5432 -U hive; do
+            echo "Waiting for postgres..."
+            sleep 2
+          done
+      - name: download-jdbc
+        image: curlimages/curl:latest
+        command:
+        - sh
+        - -c
+        - |
+          curl -L -o /opt/hive/lib/postgresql-jdbc.jar https://jdbc.postgresql.org/download/postgresql-42.7.1.jar
+          curl -L -o /opt/hive/lib/hadoop-aws.jar https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.4/hadoop-aws-3.3.4.jar
+          curl -L -o /opt/hive/lib/aws-sdk-bundle.jar https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.262/aws-java-sdk-bundle-1.12.262.jar
+        volumeMounts:
+        - name: hive-lib
+          mountPath: /opt/hive/lib
+      containers:
+      - name: hive-metastore
+        image: apache/hive:4.0.0
+        ports:
+        - containerPort: 9083
+          name: thrift
+          protocol: TCP
+        env:
+        - name: SERVICE_NAME
+          value: "metastore"
+        - name: DB_DRIVER
+          value: "postgres"
+        - name: SERVICE_OPTS
+          value: "-Djavax.jdo.option.ConnectionDriverName=org.postgresql.Driver -Djavax.jdo.option.ConnectionURL=jdbc:postgresql://postgres:5432/metastore -Djavax.jdo.option.ConnectionUserName=hive -Djavax.jdo.option.ConnectionPassword=hive"
+        - name: AWS_ACCESS_KEY_ID
+          value: "admin"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "password123"
+        - name: HADOOP_CONF_DIR
+          value: "/etc/hadoop/conf"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        livenessProbe:
+          exec:
+            command:
+            - pgrep
+            - -f
+            - HiveMetaStore
+          initialDelaySeconds: 90
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - pgrep
+            - -f
+            - HiveMetaStore
+          initialDelaySeconds: 60
+          periodSeconds: 5
+        volumeMounts:
+        - name: hive-lib
+          mountPath: /opt/hive/lib
+        - name: hadoop-conf
+          mountPath: /etc/hadoop/conf
+      volumes:
+      - name: hive-lib
+        emptyDir: {}
+      - name: hadoop-conf
+        configMap:
+          name: hadoop-config
+---
 # Spark Master Deployment
 apiVersion: apps/v1
 kind: Deployment
@@ -215,3 +371,22 @@ spec:
             port: 8080
           initialDelaySeconds: 20
           periodSeconds: 5
+        volumeMounts:
+        - name: trino-config
+          mountPath: /etc/trino
+        - name: catalog-hive
+          mountPath: /etc/trino/catalog/hive.properties
+          subPath: hive.properties
+        - name: catalog-iceberg
+          mountPath: /etc/trino/catalog/iceberg.properties
+          subPath: iceberg.properties
+      volumes:
+      - name: trino-config
+        configMap:
+          name: trino-config
+      - name: catalog-hive
+        configMap:
+          name: trino-config
+      - name: catalog-iceberg
+        configMap:
+          name: trino-config
