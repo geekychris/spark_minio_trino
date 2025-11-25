@@ -1,0 +1,217 @@
+# MinIO Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio
+  labels:
+    app: minio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minio
+  template:
+    metadata:
+      labels:
+        app: minio
+    spec:
+      containers:
+      - name: minio
+        image: minio/minio:latest
+        args:
+        - server
+        - /data
+        - --console-address
+        - ":9001"
+        ports:
+        - containerPort: 9000
+          name: api
+          protocol: TCP
+        - containerPort: 9001
+          name: console
+          protocol: TCP
+        env:
+        - name: MINIO_ROOT_USER
+          value: "admin"
+        - name: MINIO_ROOT_PASSWORD
+          value: "password123"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /minio/health/live
+            port: 9000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /minio/health/ready
+            port: 9000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: minio-data
+          mountPath: /data
+      volumes:
+      - name: minio-data
+        emptyDir: {}
+---
+# Spark Master Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spark-master
+  labels:
+    app: spark-master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spark-master
+  template:
+    metadata:
+      labels:
+        app: spark-master
+    spec:
+      containers:
+      - name: spark-master
+        image: apache/spark:3.5.0
+        command:
+        - /opt/spark/bin/spark-class
+        - org.apache.spark.deploy.master.Master
+        ports:
+        - containerPort: 8080
+          name: web
+          protocol: TCP
+        - containerPort: 7077
+          name: master
+          protocol: TCP
+        env:
+        - name: SPARK_NO_DAEMONIZE
+          value: "1"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        volumeMounts:
+        - name: spark-apps
+          mountPath: /opt/spark-apps
+        - name: spark-apps-java
+          mountPath: /opt/spark-apps-java
+        - name: spark-data
+          mountPath: /opt/spark-data
+      volumes:
+      - name: spark-apps
+        emptyDir: {}
+      - name: spark-apps-java
+        emptyDir: {}
+      - name: spark-data
+        emptyDir: {}
+---
+# Spark Worker Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spark-worker
+  labels:
+    app: spark-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spark-worker
+  template:
+    metadata:
+      labels:
+        app: spark-worker
+    spec:
+      containers:
+      - name: spark-worker
+        image: apache/spark:3.5.0
+        command:
+        - /opt/spark/bin/spark-class
+        - org.apache.spark.deploy.worker.Worker
+        - spark://spark-master:7077
+        env:
+        - name: SPARK_NO_DAEMONIZE
+          value: "1"
+        - name: SPARK_WORKER_MEMORY
+          value: "2g"
+        - name: SPARK_WORKER_CORES
+          value: "2"
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "3Gi"
+            cpu: "2000m"
+        volumeMounts:
+        - name: spark-apps
+          mountPath: /opt/spark-apps
+        - name: spark-apps-java
+          mountPath: /opt/spark-apps-java
+        - name: spark-data
+          mountPath: /opt/spark-data
+      volumes:
+      - name: spark-apps
+        emptyDir: {}
+      - name: spark-apps-java
+        emptyDir: {}
+      - name: spark-data
+        emptyDir: {}
+---
+# Trino Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trino
+  labels:
+    app: trino
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trino
+  template:
+    metadata:
+      labels:
+        app: trino
+    spec:
+      containers:
+      - name: trino
+        image: trinodb/trino:latest
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        env:
+        - name: TRINO_ENVIRONMENT
+          value: "production"
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        livenessProbe:
+          httpGet:
+            path: /v1/info
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /v1/info
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 5

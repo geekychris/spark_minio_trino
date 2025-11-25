@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password123
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio-data:/data
+    networks:
+      - lakehouse-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minio-init:
+    image: minio/mc:latest
+    container_name: minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set myminio http://minio:9000 admin password123;
+      /usr/bin/mc mb myminio/lakehouse || true;
+      /usr/bin/mc mb myminio/warehouse || true;
+      exit 0;
+      "
+    networks:
+      - lakehouse-network
+
+  spark-master:
+    image: apache/spark:3.5.0
+    container_name: spark-master
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
+    environment:
+      - SPARK_NO_DAEMONIZE=1
+    ports:
+      - "8082:8080"
+      - "7077:7077"
+    volumes:
+      - ./spark-apps:/opt/spark-apps
+      - ./spark-apps-java:/opt/spark-apps-java
+      - ./spark-data:/opt/spark-data
+    networks:
+      - lakehouse-network
+
+  spark-worker:
+    image: apache/spark:3.5.0
+    container_name: spark-worker
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    environment:
+      - SPARK_NO_DAEMONIZE=1
+      - SPARK_WORKER_MEMORY=2g
+      - SPARK_WORKER_CORES=2
+    depends_on:
+      - spark-master
+    volumes:
+      - ./spark-apps:/opt/spark-apps
+      - ./spark-apps-java:/opt/spark-apps-java
+      - ./spark-data:/opt/spark-data
+    networks:
+      - lakehouse-network
+
+
+  trino:
+    image: trinodb/trino:latest
+    container_name: trino
+    ports:
+      - "8081:8080"
+    environment:
+      - TRINO_ENVIRONMENT=production
+    volumes:
+      - ./config:/etc/trino
+      - ./catalog:/etc/trino/catalog
+    depends_on:
+      - minio
+    networks:
+      - lakehouse-network
+    restart: unless-stopped
+
+volumes:
+  minio-data:
+    driver: local
+
+networks:
+  lakehouse-network:
+    driver: bridge

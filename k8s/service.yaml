@@ -1,0 +1,80 @@
+# MinIO Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio
+  labels:
+    app: minio
+spec:
+  type: NodePort
+  ports:
+  - port: 9000
+    targetPort: 9000
+    nodePort: 30900
+    protocol: TCP
+    name: api
+  - port: 9001
+    targetPort: 9001
+    nodePort: 30901
+    protocol: TCP
+    name: console
+  selector:
+    app: minio
+---
+# Spark Master Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: spark-master
+  labels:
+    app: spark-master
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30082
+    protocol: TCP
+    name: web
+  - port: 7077
+    targetPort: 7077
+    nodePort: 30077
+    protocol: TCP
+    name: master
+  selector:
+    app: spark-master
+---
+# Spark Worker Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: spark-worker
+  labels:
+    app: spark-worker
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8081
+    targetPort: 8081
+    protocol: TCP
+    name: worker
+  selector:
+    app: spark-worker
+---
+# Trino Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: trino
+  labels:
+    app: trino
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30081
+    protocol: TCP
+    name: http
+  selector:
+    app: trino
