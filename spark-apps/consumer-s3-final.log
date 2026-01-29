@@ -1,0 +1,69 @@
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /home/spark/.ivy2/cache
+The jars for the packages stored in: /home/spark/.ivy2/jars
+org.apache.hadoop#hadoop-aws added as a dependency
+com.amazonaws#aws-java-sdk-bundle added as a dependency
+software.amazon.awssdk#bundle added as a dependency
+software.amazon.awssdk#url-connection-client added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-db98987e-14ab-478d-9628-c76e305c0745;1.0
+	confs: [default]
+	found org.apache.hadoop#hadoop-aws;3.3.4 in central
+	found com.amazonaws#aws-java-sdk-bundle;1.12.262 in central
+	found org.wildfly.openssl#wildfly-openssl;1.0.7.Final in central
+	found software.amazon.awssdk#bundle;2.17.257 in central
+	found software.amazon.eventstream#eventstream;1.0.1 in central
+	found software.amazon.awssdk#url-connection-client;2.17.257 in central
+	found software.amazon.awssdk#utils;2.17.257 in central
+	found org.reactivestreams#reactive-streams;1.0.3 in central
+	found software.amazon.awssdk#annotations;2.17.257 in central
+	found org.slf4j#slf4j-api;1.7.30 in central
+	found software.amazon.awssdk#http-client-spi;2.17.257 in central
+	found software.amazon.awssdk#metrics-spi;2.17.257 in central
+:: resolution report :: resolve 230ms :: artifacts dl 13ms
+	:: modules in use:
+	com.amazonaws#aws-java-sdk-bundle;1.12.262 from central in [default]
+	org.apache.hadoop#hadoop-aws;3.3.4 from central in [default]
+	org.reactivestreams#reactive-streams;1.0.3 from central in [default]
+	org.slf4j#slf4j-api;1.7.30 from central in [default]
+	org.wildfly.openssl#wildfly-openssl;1.0.7.Final from central in [default]
+	software.amazon.awssdk#annotations;2.17.257 from central in [default]
+	software.amazon.awssdk#bundle;2.17.257 from central in [default]
+	software.amazon.awssdk#http-client-spi;2.17.257 from central in [default]
+	software.amazon.awssdk#metrics-spi;2.17.257 from central in [default]
+	software.amazon.awssdk#url-connection-client;2.17.257 from central in [default]
+	software.amazon.awssdk#utils;2.17.257 from central in [default]
+	software.amazon.eventstream#eventstream;1.0.1 from central in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   12  |   0   |   0   |   0   ||   12  |   0   |
+	---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-db98987e-14ab-478d-9628-c76e305c0745
+	confs: [default]
+	0 artifacts copied, 12 already retrieved (0kB/6ms)
+25/11/25 19:29:01 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Exception in thread "main" java.io.FileNotFoundException: /opt/spark-apps/configs (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(Unknown Source)
+	at java.base/java.io.FileInputStream.<init>(Unknown Source)
+	at com.fasterxml.jackson.core.TokenStreamFactory._fileInputStream(TokenStreamFactory.java:278)
+	at com.fasterxml.jackson.core.JsonFactory.createParser(JsonFactory.java:1089)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3637)
+	at com.logging.consumer.StructuredLogConsumer.loadConfig(StructuredLogConsumer.java:103)
+	at com.logging.consumer.StructuredLogConsumer.loadConfigs(StructuredLogConsumer.java:98)
+	at com.logging.consumer.StructuredLogConsumer.main(StructuredLogConsumer.java:48)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.spark.deploy.JavaMainApplication.start(SparkApplication.scala:52)
+	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:1029)
+	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:194)
+	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:217)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:91)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1120)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1129)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+25/11/25 19:29:01 INFO ShutdownHookManager: Shutdown hook called
+25/11/25 19:29:01 INFO ShutdownHookManager: Deleting directory /tmp/spark-9cee7978-3a0e-4a3b-94fb-92548724c2bb

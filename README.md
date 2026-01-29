@@ -1,72 +1,104 @@
-# MinIO + Spark + Trino Lakehouse Demo
+# Data Lakehouse Demo
 
-This demo shows how to use MinIO for S3-compatible storage with Spark for data generation and Trino for SQL queries, all using Parquet format.
+## TL;DR
+
+**Purpose:** Complete data lakehouse environment with object storage, distributed processing, and SQL analytics.
+
+**Start everything:**
+```bash
+./start_lakehouse.sh
+```
+
+**Stop everything:**
+```bash
+./stop_lakehouse.sh          # Keeps data
+./stop_lakehouse.sh --clean  # Removes data
+```
+
+**Query data:**
+```bash
+docker exec -it trino trino
+trino> USE hive.ecommerce;
+trino> SELECT * FROM customers LIMIT 10;
+```
+
+**Access UIs:**
+- MinIO Console: http://localhost:9001 (admin/password123)
+- Spark UI: http://localhost:8082
+- Trino UI: http://localhost:8081
+
+---
 
 ## Architecture
 
-- **MinIO**: S3-compatible object storage
-- **Spark**: Data generation and processing (with embedded Derby metastore)
-- **Trino**: SQL query engine with Hive connector
+Modern data lakehouse with S3-compatible storage, distributed processing, and SQL query engine:
+
+```
+┌─────────────┐     ┌──────────────┐     ┌─────────────┐
+│   Kafka     │────▶│    Spark     │────▶│   MinIO     │
+│ (Streaming) │     │  (Processing)│     │ (S3 Storage)│
+└─────────────┘     └──────────────┘     └─────────────┘
+                            │                     │
+                            ▼                     ▼
+                    ┌──────────────┐     ┌─────────────┐
+                    │     Hive     │────▶│  Postgres   │
+                    │  Metastore   │     │ (Metadata)  │
+                    └──────────────┘     └─────────────┘
+                            │
+                            ▼
+                    ┌──────────────┐
+                    │    Trino     │
+                    │  (SQL Query) │
+                    └──────────────┘
+```
+
+### Components
+
+- **MinIO**: S3-compatible object storage (data lake)
+- **Postgres**: Metadata database for Hive Metastore
+- **Hive Metastore**: Centralized metadata repository for tables
+- **Spark**: Distributed data processing and ETL
+- **Kafka + Zookeeper**: Event streaming platform
+- **Trino**: Distributed SQL query engine for analytics
 
 ## Quick Start
 
-### 1. Start all services
+### Automated Setup (Recommended)
 
 ```bash
-docker-compose up -d
+# Start everything and generate sample data
+./start_lakehouse.sh
+
+# Stop when done (keeps data)
+./stop_lakehouse.sh
+
+# Stop and remove all data
+./stop_lakehouse.sh --clean
 ```
 
-Wait for all services to become healthy (~30 seconds).
+The automated script will:
+1. Start all infrastructure services in correct order
+2. Initialize MinIO buckets
+3. Generate sample e-commerce data (1K customers, 100 products, 5K orders)
+4. Display all service URLs and ports
 
-### 2. Fix Spark permissions (one-time setup)
+### Generate Additional Data
 
+After services are running, you can run data generators:
+
+**Parquet format (default):**
 ```bash
-docker exec -u root spark-master mkdir -p /home/spark/.ivy2/cache
-docker exec -u root spark-master chown -R spark:spark /home/spark/.ivy2
+./run_spark_app.sh              # Python version
+./run_spark_app_java.sh         # Java version (builds with Maven)
 ```
 
-### 3. Generate sample data
-
-**Python version:**
+**Iceberg format:**
 ```bash
-./run_spark_app.sh
+./run_iceberg_spark_app.sh      # Python version
+./run_iceberg_spark_app_java.sh # Java version (builds with Maven)
 ```
 
-**Java version:**
-```bash
-./run_spark_app_java.sh
-```
-
-Either version will generate 3 tables in the `ecommerce` database:
-- `customers` (1,000 records)
-- `products` (100 records)  
-- `orders` (5,000 records, partitioned by status)
-
-See `spark-apps-java/README.md` for details on the Java implementation.
-
-### 4. Create tables in Trino
-
-```bash
-# Create schema
-docker exec trino trino --execute "CREATE SCHEMA IF NOT EXISTS hive.ecommerce WITH (location='s3a://warehouse/ecommerce.db/');"
-
-# Create customers table
-docker exec trino trino --execute "CREATE TABLE IF NOT EXISTS hive.ecommerce.customers (customer_id INT, first_name VARCHAR, last_name VARCHAR, email VARCHAR, city VARCHAR, state VARCHAR) WITH (external_location='s3a://warehouse/ecommerce.db/customers/', format='PARQUET');"
-
-# Create products table
-docker exec trino trino --execute "CREATE TABLE IF NOT EXISTS hive.ecommerce.products (product_id INT, name VARCHAR, category VARCHAR, price DOUBLE) WITH (external_location='s3a://warehouse/ecommerce.db/products/', format='PARQUET');"
-
-# Create orders table (partitioned by status)
-docker exec trino trino --execute "CREATE TABLE IF NOT EXISTS hive.ecommerce.orders (order_id INT, customer_id INT, product_id INT, quantity INT, total_amount DOUBLE, order_date TIMESTAMP, status VARCHAR) WITH (external_location='s3a://warehouse/ecommerce.db/orders/', format='PARQUET', partitioned_by=ARRAY['status']);"
-```
-
-### 5. Note about partitioned tables
-
-**Current limitation**: The file-based Hive metastore has issues with external partitioned tables. The `customers` and `products` tables work perfectly. The `orders` table is created but partition discovery doesn't work automatically with the current configuration.
-
-**Workaround**: You can still query all the data by reading the Parquet files directly or by configuring a proper Hive metastore server (not included in this simplified demo).
-
-### 6. Query data with Trino
+### Query Data with Trino
 
 ```bash
 # Interactive shell
@@ -88,21 +120,62 @@ SELECT status, COUNT(*) as order_count, SUM(total_amount) as total_revenue
 FROM orders GROUP BY status;
 ```
 
-## Service URLs
+## Accessing Layers
 
-- **MinIO Console**: http://localhost:9001 (admin / password123)
-- **Spark Master UI**: http://localhost:8082
-- **Trino UI**: http://localhost:8081
+### Web Interfaces
 
-## Checking Data in MinIO
+| Service | URL | Purpose | Credentials |
+|---------|-----|---------|-------------|
+| **MinIO Console** | http://localhost:9001 | Browse S3 buckets, upload/download files | admin / password123 |
+| **Spark Master UI** | http://localhost:8082 | Monitor Spark cluster, running jobs, workers | N/A |
+| **Trino Web UI** | http://localhost:8081 | View query history, cluster status, workers | N/A |
 
+### Service Ports
+
+| Service | Port | Purpose |
+|---------|------|----------|
+| Trino | 8081 | SQL queries |
+| Spark Master | 7077 | Spark cluster coordination |
+| Hive Metastore | 9083 | Table metadata |
+| MinIO S3 API | 9000 | Object storage API |
+| Kafka | 9092 | Event streaming |
+| Zookeeper | 2181 | Kafka coordination |
+| PostgreSQL | 5432 | Metadata database |
+
+### Command-Line Access
+
+**Trino CLI:**
 ```bash
-# Set up MinIO client alias
-docker exec minio mc alias set myminio http://localhost:9000 admin password123
+docker exec -it trino trino
+```
 
-# List data in warehouse
+**MinIO CLI:**
+```bash
+# List buckets
+docker exec minio mc ls myminio/
+
+# Browse data files
 docker exec minio mc ls myminio/warehouse/ --recursive
 ```
+
+**Spark Shell:**
+```bash
+# PySpark
+docker exec -it spark-master /opt/spark/bin/pyspark
+
+# Scala Spark
+docker exec -it spark-master /opt/spark/bin/spark-shell
+```
+
+**Kafka:**
+```bash
+# List topics
+docker exec kafka kafka-topics --bootstrap-server localhost:9092 --list
+
+# Consume messages
+docker exec kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic <topic-name> --from-beginning
+```
+
 
 ## Architecture Details
 
@@ -156,25 +229,30 @@ ORDER BY total_spent DESC
 LIMIT 10;
 ```
 
-## Stopping Services
+## Sample Data
 
-```bash
-docker-compose down
+The demo generates an e-commerce dataset:
+- **1,000 customers** (name, email, city, state)
+- **100 products** (name, category, price)
+- **5,000 orders** (customer, product, quantity, status, date)
 
-# To also remove volumes and data:
-docker-compose down -v
-```
+Data is stored in Parquet format in MinIO at `s3a://warehouse/ecommerce.db/`
 
 ## Troubleshooting
 
-### Spark ivy cache permission errors
-Run the fix from step 2 in Quick Start.
+**Services not starting:**
+- Ensure Docker has at least 4GB memory allocated
+- Check for port conflicts: 8081, 8082, 9000, 9001, 9083, 9092, 5432, 2181
 
-### Trino shows empty results for orders table
-Make sure you've registered the partitions (step 5).
+**Trino connection errors:**
+- Wait 30-90 seconds for Hive Metastore to initialize
+- Check service health: `docker compose ps`
 
-### Trino server is still initializing
-Wait 30-60 seconds after starting services for Trino to fully initialize.
+**Data not appearing:**
+- Verify Hive Metastore is healthy: `docker ps | grep hive-metastore`
+- Check MinIO has data: `docker exec minio mc ls myminio/warehouse/ --recursive`
 
-### Connection refused to MinIO
-Ensure MinIO container is healthy: `docker ps` should show "healthy" status.
+**View logs:**
+```bash
+docker compose logs -f [service-name]
+```

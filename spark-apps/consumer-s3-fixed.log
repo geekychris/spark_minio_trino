@@ -1,0 +1,48 @@
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /home/spark/.ivy2/cache
+The jars for the packages stored in: /home/spark/.ivy2/jars
+org.apache.hadoop#hadoop-aws added as a dependency
+com.amazonaws#aws-java-sdk-bundle added as a dependency
+software.amazon.awssdk#bundle added as a dependency
+software.amazon.awssdk#url-connection-client added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-6d3268ed-f115-4169-87b0-1f10ce89afa9;1.0
+	confs: [default]
+	found org.apache.hadoop#hadoop-aws;3.3.4 in central
+	found com.amazonaws#aws-java-sdk-bundle;1.12.262 in central
+	found org.wildfly.openssl#wildfly-openssl;1.0.7.Final in central
+	found software.amazon.awssdk#bundle;2.17.257 in central
+	found software.amazon.eventstream#eventstream;1.0.1 in central
+	found software.amazon.awssdk#url-connection-client;2.17.257 in central
+	found software.amazon.awssdk#utils;2.17.257 in central
+	found org.reactivestreams#reactive-streams;1.0.3 in central
+	found software.amazon.awssdk#annotations;2.17.257 in central
+	found org.slf4j#slf4j-api;1.7.30 in central
+	found software.amazon.awssdk#http-client-spi;2.17.257 in central
+	found software.amazon.awssdk#metrics-spi;2.17.257 in central
+:: resolution report :: resolve 174ms :: artifacts dl 10ms
+	:: modules in use:
+	com.amazonaws#aws-java-sdk-bundle;1.12.262 from central in [default]
+	org.apache.hadoop#hadoop-aws;3.3.4 from central in [default]
+	org.reactivestreams#reactive-streams;1.0.3 from central in [default]
+	org.slf4j#slf4j-api;1.7.30 from central in [default]
+	org.wildfly.openssl#wildfly-openssl;1.0.7.Final from central in [default]
+	software.amazon.awssdk#annotations;2.17.257 from central in [default]
+	software.amazon.awssdk#bundle;2.17.257 from central in [default]
+	software.amazon.awssdk#http-client-spi;2.17.257 from central in [default]
+	software.amazon.awssdk#metrics-spi;2.17.257 from central in [default]
+	software.amazon.awssdk#url-connection-client;2.17.257 from central in [default]
+	software.amazon.awssdk#utils;2.17.257 from central in [default]
+	software.amazon.eventstream#eventstream;1.0.1 from central in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   12  |   0   |   0   |   0   ||   12  |   0   |
+	---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-6d3268ed-f115-4169-87b0-1f10ce89afa9
+	confs: [default]
+	0 artifacts copied, 12 already retrieved (0kB/4ms)
+25/11/25 19:28:08 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Usage: StructuredLogConsumer <config-file-or-dir> <kafka-bootstrap-servers> <warehouse-path> [checkpoint-path]
+25/11/25 19:28:08 INFO ShutdownHookManager: Shutdown hook called
+25/11/25 19:28:08 INFO ShutdownHookManager: Deleting directory /tmp/spark-c07bb08e-6fa3-4758-b979-08a3e77c394a

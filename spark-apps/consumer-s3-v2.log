@@ -1,0 +1,67 @@
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /home/spark/.ivy2/cache
+The jars for the packages stored in: /home/spark/.ivy2/jars
+org.apache.hadoop#hadoop-aws added as a dependency
+com.amazonaws#aws-java-sdk-bundle added as a dependency
+software.amazon.awssdk#bundle added as a dependency
+software.amazon.awssdk#url-connection-client added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-3ee19129-37ff-4742-beb6-5ab93c13bb14;1.0
+	confs: [default]
+	found org.apache.hadoop#hadoop-aws;3.3.4 in central
+	found com.amazonaws#aws-java-sdk-bundle;1.12.262 in central
+	found org.wildfly.openssl#wildfly-openssl;1.0.7.Final in central
+	found software.amazon.awssdk#bundle;2.17.257 in central
+	found software.amazon.eventstream#eventstream;1.0.1 in central
+	found software.amazon.awssdk#url-connection-client;2.17.257 in central
+	found software.amazon.awssdk#utils;2.17.257 in central
+	found org.reactivestreams#reactive-streams;1.0.3 in central
+	found software.amazon.awssdk#annotations;2.17.257 in central
+	found org.slf4j#slf4j-api;1.7.30 in central
+	found software.amazon.awssdk#http-client-spi;2.17.257 in central
+	found software.amazon.awssdk#metrics-spi;2.17.257 in central
+downloading https://repo1.maven.org/maven2/software/amazon/awssdk/bundle/2.17.257/bundle-2.17.257.jar ...
+	[SUCCESSFUL ] software.amazon.awssdk#bundle;2.17.257!bundle.jar (4755ms)
+downloading https://repo1.maven.org/maven2/software/amazon/awssdk/url-connection-client/2.17.257/url-connection-client-2.17.257.jar ...
+	[SUCCESSFUL ] software.amazon.awssdk#url-connection-client;2.17.257!url-connection-client.jar (106ms)
+downloading https://repo1.maven.org/maven2/software/amazon/eventstream/eventstream/1.0.1/eventstream-1.0.1.jar ...
+	[SUCCESSFUL ] software.amazon.eventstream#eventstream;1.0.1!eventstream.jar (82ms)
+downloading https://repo1.maven.org/maven2/software/amazon/awssdk/utils/2.17.257/utils-2.17.257.jar ...
+	[SUCCESSFUL ] software.amazon.awssdk#utils;2.17.257!utils.jar (106ms)
+downloading https://repo1.maven.org/maven2/software/amazon/awssdk/annotations/2.17.257/annotations-2.17.257.jar ...
+	[SUCCESSFUL ] software.amazon.awssdk#annotations;2.17.257!annotations.jar (135ms)
+downloading https://repo1.maven.org/maven2/software/amazon/awssdk/http-client-spi/2.17.257/http-client-spi-2.17.257.jar ...
+	[SUCCESSFUL ] software.amazon.awssdk#http-client-spi;2.17.257!http-client-spi.jar (107ms)
+downloading https://repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar ...
+	[SUCCESSFUL ] org.reactivestreams#reactive-streams;1.0.3!reactive-streams.jar (71ms)
+downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar ...
+	[SUCCESSFUL ] org.slf4j#slf4j-api;1.7.30!slf4j-api.jar (62ms)
+downloading https://repo1.maven.org/maven2/software/amazon/awssdk/metrics-spi/2.17.257/metrics-spi-2.17.257.jar ...
+	[SUCCESSFUL ] software.amazon.awssdk#metrics-spi;2.17.257!metrics-spi.jar (110ms)
+:: resolution report :: resolve 4110ms :: artifacts dl 5550ms
+	:: modules in use:
+	com.amazonaws#aws-java-sdk-bundle;1.12.262 from central in [default]
+	org.apache.hadoop#hadoop-aws;3.3.4 from central in [default]
+	org.reactivestreams#reactive-streams;1.0.3 from central in [default]
+	org.slf4j#slf4j-api;1.7.30 from central in [default]
+	org.wildfly.openssl#wildfly-openssl;1.0.7.Final from central in [default]
+	software.amazon.awssdk#annotations;2.17.257 from central in [default]
+	software.amazon.awssdk#bundle;2.17.257 from central in [default]
+	software.amazon.awssdk#http-client-spi;2.17.257 from central in [default]
+	software.amazon.awssdk#metrics-spi;2.17.257 from central in [default]
+	software.amazon.awssdk#url-connection-client;2.17.257 from central in [default]
+	software.amazon.awssdk#utils;2.17.257 from central in [default]
+	software.amazon.eventstream#eventstream;1.0.1 from central in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   12  |   9   |   9   |   0   ||   12  |   9   |
+	---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-3ee19129-37ff-4742-beb6-5ab93c13bb14
+	confs: [default]
+	9 artifacts copied, 3 already retrieved (352465kB/204ms)
+25/11/25 19:27:06 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/11/25 19:27:06 WARN DependencyUtils: Local jar /opt/spark-apps/spark-consumer-1.0-SNAPSHOT.jar does not exist, skipping.
+Error: Failed to load class com.logging.consumer.StructuredLogConsumer.
+25/11/25 19:27:07 INFO ShutdownHookManager: Shutdown hook called
+25/11/25 19:27:07 INFO ShutdownHookManager: Deleting directory /tmp/spark-74035e8c-3396-4a4b-b7b5-29289fda9e07

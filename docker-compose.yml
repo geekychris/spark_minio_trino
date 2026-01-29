@@ -93,6 +93,7 @@ services:
     command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
     environment:
       - SPARK_NO_DAEMONIZE=1
+    user: "0:0"
     ports:
       - "8082:8080"
       - "7077:7077"
@@ -100,6 +101,7 @@ services:
       - ./spark-apps:/opt/spark-apps
       - ./spark-apps-java:/opt/spark-apps-java
       - ./spark-data:/opt/spark-data
+      - spark-ivy-cache:/home/spark/.ivy2
     networks:
       - lakehouse-network
 
@@ -111,12 +113,14 @@ services:
       - SPARK_NO_DAEMONIZE=1
       - SPARK_WORKER_MEMORY=2g
       - SPARK_WORKER_CORES=2
+    user: "0:0"
     depends_on:
       - spark-master
     volumes:
       - ./spark-apps:/opt/spark-apps
       - ./spark-apps-java:/opt/spark-apps-java
       - ./spark-data:/opt/spark-data
+      - spark-ivy-cache:/home/spark/.ivy2
     networks:
       - lakehouse-network
 
@@ -186,6 +190,8 @@ volumes:
   minio-data:
     driver: local
   postgres-data:
+    driver: local
+  spark-ivy-cache:
     driver: local
 
 networks:

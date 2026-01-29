@@ -1,0 +1,309 @@
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /home/spark/.ivy2/cache
+The jars for the packages stored in: /home/spark/.ivy2/jars
+org.apache.hadoop#hadoop-aws added as a dependency
+com.amazonaws#aws-java-sdk-bundle added as a dependency
+software.amazon.awssdk#bundle added as a dependency
+software.amazon.awssdk#url-connection-client added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-4ccb1d10-f495-4e90-837b-40fde6ad1a16;1.0
+	confs: [default]
+	found org.apache.hadoop#hadoop-aws;3.3.4 in central
+	found com.amazonaws#aws-java-sdk-bundle;1.12.262 in central
+	found org.wildfly.openssl#wildfly-openssl;1.0.7.Final in central
+	found software.amazon.awssdk#bundle;2.17.257 in central
+	found software.amazon.eventstream#eventstream;1.0.1 in central
+	found software.amazon.awssdk#url-connection-client;2.17.257 in central
+	found software.amazon.awssdk#utils;2.17.257 in central
+	found org.reactivestreams#reactive-streams;1.0.3 in central
+	found software.amazon.awssdk#annotations;2.17.257 in central
+	found org.slf4j#slf4j-api;1.7.30 in central
+	found software.amazon.awssdk#http-client-spi;2.17.257 in central
+	found software.amazon.awssdk#metrics-spi;2.17.257 in central
+:: resolution report :: resolve 223ms :: artifacts dl 6ms
+	:: modules in use:
+	com.amazonaws#aws-java-sdk-bundle;1.12.262 from central in [default]
+	org.apache.hadoop#hadoop-aws;3.3.4 from central in [default]
+	org.reactivestreams#reactive-streams;1.0.3 from central in [default]
+	org.slf4j#slf4j-api;1.7.30 from central in [default]
+	org.wildfly.openssl#wildfly-openssl;1.0.7.Final from central in [default]
+	software.amazon.awssdk#annotations;2.17.257 from central in [default]
+	software.amazon.awssdk#bundle;2.17.257 from central in [default]
+	software.amazon.awssdk#http-client-spi;2.17.257 from central in [default]
+	software.amazon.awssdk#metrics-spi;2.17.257 from central in [default]
+	software.amazon.awssdk#url-connection-client;2.17.257 from central in [default]
+	software.amazon.awssdk#utils;2.17.257 from central in [default]
+	software.amazon.eventstream#eventstream;1.0.1 from central in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   12  |   0   |   0   |   0   ||   12  |   0   |
+	---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-4ccb1d10-f495-4e90-837b-40fde6ad1a16
+	confs: [default]
+	0 artifacts copied, 12 already retrieved (0kB/5ms)
+25/11/25 19:35:57 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Loaded 2 log configurations
+25/11/25 19:35:57 INFO SparkContext: Running Spark version 3.5.0
+25/11/25 19:35:57 INFO SparkContext: OS info Linux, 6.6.96-0-virt, aarch64
+25/11/25 19:35:57 INFO SparkContext: Java version 11.0.20.1
+25/11/25 19:35:57 INFO ResourceUtils: ==============================================================
+25/11/25 19:35:57 INFO ResourceUtils: No custom resources configured for spark.driver.
+25/11/25 19:35:57 INFO ResourceUtils: ==============================================================
+25/11/25 19:35:57 INFO SparkContext: Submitted application: StructuredLogConsumer
+25/11/25 19:35:57 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+25/11/25 19:35:57 INFO ResourceProfile: Limiting resource is cpu
+25/11/25 19:35:57 INFO ResourceProfileManager: Added ResourceProfile id: 0
+25/11/25 19:35:57 INFO SecurityManager: Changing view acls to: spark
+25/11/25 19:35:57 INFO SecurityManager: Changing modify acls to: spark
+25/11/25 19:35:57 INFO SecurityManager: Changing view acls groups to: 
+25/11/25 19:35:57 INFO SecurityManager: Changing modify acls groups to: 
+25/11/25 19:35:57 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: spark; groups with view permissions: EMPTY; users with modify permissions: spark; groups with modify permissions: EMPTY
+25/11/25 19:35:57 INFO Utils: Successfully started service 'sparkDriver' on port 42051.
+25/11/25 19:35:57 INFO SparkEnv: Registering MapOutputTracker
+25/11/25 19:35:57 INFO SparkEnv: Registering BlockManagerMaster
+25/11/25 19:35:57 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+25/11/25 19:35:57 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+25/11/25 19:35:57 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+25/11/25 19:35:57 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-c5b9a19e-986d-4e3d-86b9-51bfb134d53c
+25/11/25 19:35:57 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+25/11/25 19:35:57 INFO SparkEnv: Registering OutputCommitCoordinator
+25/11/25 19:35:57 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+25/11/25 19:35:57 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+25/11/25 19:35:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar at spark://77a86cad8211:42051/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar at spark://77a86cad8211:42051/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.awssdk_bundle-2.17.257.jar at spark://77a86cad8211:42051/jars/software.amazon.awssdk_bundle-2.17.257.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.awssdk_url-connection-client-2.17.257.jar at spark://77a86cad8211:42051/jars/software.amazon.awssdk_url-connection-client-2.17.257.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar at spark://77a86cad8211:42051/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.eventstream_eventstream-1.0.1.jar at spark://77a86cad8211:42051/jars/software.amazon.eventstream_eventstream-1.0.1.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.awssdk_utils-2.17.257.jar at spark://77a86cad8211:42051/jars/software.amazon.awssdk_utils-2.17.257.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.awssdk_annotations-2.17.257.jar at spark://77a86cad8211:42051/jars/software.amazon.awssdk_annotations-2.17.257.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.awssdk_http-client-spi-2.17.257.jar at spark://77a86cad8211:42051/jars/software.amazon.awssdk_http-client-spi-2.17.257.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/org.reactivestreams_reactive-streams-1.0.3.jar at spark://77a86cad8211:42051/jars/org.reactivestreams_reactive-streams-1.0.3.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/org.slf4j_slf4j-api-1.7.30.jar at spark://77a86cad8211:42051/jars/org.slf4j_slf4j-api-1.7.30.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.awssdk_metrics-spi-2.17.257.jar at spark://77a86cad8211:42051/jars/software.amazon.awssdk_metrics-spi-2.17.257.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO SparkContext: Added JAR file:/opt/spark-apps-java/structured-log-consumer-1.0.0.jar at spark://77a86cad8211:42051/jars/structured-log-consumer-1.0.0.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO Executor: Starting executor ID driver on host 77a86cad8211
+25/11/25 19:35:57 INFO Executor: OS info Linux, 6.6.96-0-virt, aarch64
+25/11/25 19:35:57 INFO Executor: Java version 11.0.20.1
+25/11/25 19:35:57 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+25/11/25 19:35:57 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@93bf0e0 for default.
+25/11/25 19:35:57 INFO Executor: Fetching spark://77a86cad8211:42051/jars/software.amazon.awssdk_http-client-spi-2.17.257.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO TransportClientFactory: Successfully created connection to 77a86cad8211/172.20.0.3:42051 after 14 ms (0 ms spent in bootstraps)
+25/11/25 19:35:57 INFO Utils: Fetching spark://77a86cad8211:42051/jars/software.amazon.awssdk_http-client-spi-2.17.257.jar to /tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/fetchFileTemp1921444531772770949.tmp
+25/11/25 19:35:57 INFO Executor: Adding file:/tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/software.amazon.awssdk_http-client-spi-2.17.257.jar to class loader default
+25/11/25 19:35:57 INFO Executor: Fetching spark://77a86cad8211:42051/jars/software.amazon.awssdk_annotations-2.17.257.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO Utils: Fetching spark://77a86cad8211:42051/jars/software.amazon.awssdk_annotations-2.17.257.jar to /tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/fetchFileTemp12897543789662119981.tmp
+25/11/25 19:35:57 INFO Executor: Adding file:/tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/software.amazon.awssdk_annotations-2.17.257.jar to class loader default
+25/11/25 19:35:57 INFO Executor: Fetching spark://77a86cad8211:42051/jars/org.reactivestreams_reactive-streams-1.0.3.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO Utils: Fetching spark://77a86cad8211:42051/jars/org.reactivestreams_reactive-streams-1.0.3.jar to /tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/fetchFileTemp18390625375279589912.tmp
+25/11/25 19:35:57 INFO Executor: Adding file:/tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/org.reactivestreams_reactive-streams-1.0.3.jar to class loader default
+25/11/25 19:35:57 INFO Executor: Fetching spark://77a86cad8211:42051/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar with timestamp 1764099357219
+25/11/25 19:35:57 INFO Utils: Fetching spark://77a86cad8211:42051/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar to /tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/fetchFileTemp978626415323524058.tmp
+25/11/25 19:35:58 INFO Executor: Adding file:/tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar to class loader default
+25/11/25 19:35:58 INFO Executor: Fetching spark://77a86cad8211:42051/jars/structured-log-consumer-1.0.0.jar with timestamp 1764099357219
+25/11/25 19:35:58 INFO Utils: Fetching spark://77a86cad8211:42051/jars/structured-log-consumer-1.0.0.jar to /tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/fetchFileTemp630312630374548294.tmp
+25/11/25 19:35:58 INFO Executor: Adding file:/tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/structured-log-consumer-1.0.0.jar to class loader default
+25/11/25 19:35:58 INFO Executor: Fetching spark://77a86cad8211:42051/jars/software.amazon.awssdk_bundle-2.17.257.jar with timestamp 1764099357219
+25/11/25 19:35:58 INFO Utils: Fetching spark://77a86cad8211:42051/jars/software.amazon.awssdk_bundle-2.17.257.jar to /tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/fetchFileTemp11574064471858450416.tmp
+25/11/25 19:35:58 INFO Executor: Adding file:/tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/software.amazon.awssdk_bundle-2.17.257.jar to class loader default
+25/11/25 19:35:58 INFO Executor: Fetching spark://77a86cad8211:42051/jars/software.amazon.awssdk_utils-2.17.257.jar with timestamp 1764099357219
+25/11/25 19:35:58 INFO Utils: Fetching spark://77a86cad8211:42051/jars/software.amazon.awssdk_utils-2.17.257.jar to /tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/fetchFileTemp747093322770305650.tmp
+25/11/25 19:35:58 INFO Executor: Adding file:/tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/software.amazon.awssdk_utils-2.17.257.jar to class loader default
+25/11/25 19:35:58 INFO Executor: Fetching spark://77a86cad8211:42051/jars/software.amazon.awssdk_metrics-spi-2.17.257.jar with timestamp 1764099357219
+25/11/25 19:35:58 INFO Utils: Fetching spark://77a86cad8211:42051/jars/software.amazon.awssdk_metrics-spi-2.17.257.jar to /tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/fetchFileTemp2600705643610035094.tmp
+25/11/25 19:35:58 INFO Executor: Adding file:/tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/software.amazon.awssdk_metrics-spi-2.17.257.jar to class loader default
+25/11/25 19:35:58 INFO Executor: Fetching spark://77a86cad8211:42051/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar with timestamp 1764099357219
+25/11/25 19:35:58 INFO Utils: Fetching spark://77a86cad8211:42051/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar to /tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/fetchFileTemp5838874490443667557.tmp
+25/11/25 19:35:58 INFO Executor: Adding file:/tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar to class loader default
+25/11/25 19:35:58 INFO Executor: Fetching spark://77a86cad8211:42051/jars/software.amazon.eventstream_eventstream-1.0.1.jar with timestamp 1764099357219
+25/11/25 19:35:58 INFO Utils: Fetching spark://77a86cad8211:42051/jars/software.amazon.eventstream_eventstream-1.0.1.jar to /tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/fetchFileTemp15670047613936289959.tmp
+25/11/25 19:35:58 INFO Executor: Adding file:/tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/software.amazon.eventstream_eventstream-1.0.1.jar to class loader default
+25/11/25 19:35:58 INFO Executor: Fetching spark://77a86cad8211:42051/jars/software.amazon.awssdk_url-connection-client-2.17.257.jar with timestamp 1764099357219
+25/11/25 19:35:58 INFO Utils: Fetching spark://77a86cad8211:42051/jars/software.amazon.awssdk_url-connection-client-2.17.257.jar to /tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/fetchFileTemp8968639646424402505.tmp
+25/11/25 19:35:58 INFO Executor: Adding file:/tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/software.amazon.awssdk_url-connection-client-2.17.257.jar to class loader default
+25/11/25 19:35:58 INFO Executor: Fetching spark://77a86cad8211:42051/jars/org.slf4j_slf4j-api-1.7.30.jar with timestamp 1764099357219
+25/11/25 19:35:58 INFO Utils: Fetching spark://77a86cad8211:42051/jars/org.slf4j_slf4j-api-1.7.30.jar to /tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/fetchFileTemp936060906123092766.tmp
+25/11/25 19:35:58 INFO Executor: Adding file:/tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/org.slf4j_slf4j-api-1.7.30.jar to class loader default
+25/11/25 19:35:58 INFO Executor: Fetching spark://77a86cad8211:42051/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar with timestamp 1764099357219
+25/11/25 19:35:58 INFO Utils: Fetching spark://77a86cad8211:42051/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar to /tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/fetchFileTemp7248793827446063150.tmp
+25/11/25 19:35:58 INFO Executor: Adding file:/tmp/spark-6231daa2-338b-472c-a525-4e5f996e1894/userFiles-81c70b7b-4be0-465f-8ded-59bc3c1c24ff/org.apache.hadoop_hadoop-aws-3.3.4.jar to class loader default
+25/11/25 19:35:58 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 42711.
+25/11/25 19:35:58 INFO NettyBlockTransferService: Server created on 77a86cad8211:42711
+25/11/25 19:35:58 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+25/11/25 19:35:58 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 77a86cad8211, 42711, None)
+25/11/25 19:35:58 INFO BlockManagerMasterEndpoint: Registering block manager 77a86cad8211:42711 with 434.4 MiB RAM, BlockManagerId(driver, 77a86cad8211, 42711, None)
+25/11/25 19:35:58 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 77a86cad8211, 42711, None)
+25/11/25 19:35:58 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 77a86cad8211, 42711, None)
+Processing log config: ApiMetrics -> analytics.logs.api_metrics
+Skipping database creation for Hadoop catalog
+Creating Iceberg table: local.analytics.logs.api_metrics
+Executing: CREATE TABLE IF NOT EXISTS local.analytics.logs.api_metrics (timestamp TIMESTAMP, metric_date DATE, service_name STRING, endpoint STRING, method STRING, status_code INT, response_time_ms LONG, request_size_bytes LONG, response_size_bytes LONG, user_id STRING, client_ip STRING, error_message STRING, _ingestion_timestamp TIMESTAMP, _ingestion_date DATE) USING iceberg PARTITIONED BY (metric_date, service_name) TBLPROPERTIES ('write.format.default'='parquet', 'write.parquet.compression-codec'='snappy', 'write.metadata.compression-codec'='gzip', 'sort.order'='timestamp, endpoint')
+25/11/25 19:35:59 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+Error creating table analytics.logs.api_metrics: Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(profiles=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(profiles=[])): Profile file contained no credentials for profile 'default': ProfileFile(profiles=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
+software.amazon.awssdk.core.exception.SdkClientException: Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(profiles=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(profiles=[])): Profile file contained no credentials for profile 'default': ProfileFile(profiles=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
+	at software.amazon.awssdk.core.exception.SdkClientException$BuilderImpl.build(SdkClientException.java:102)
+	at software.amazon.awssdk.auth.credentials.AwsCredentialsProviderChain.resolveCredentials(AwsCredentialsProviderChain.java:117)
+	at software.amazon.awssdk.auth.credentials.internal.LazyAwsCredentialsProvider.resolveCredentials(LazyAwsCredentialsProvider.java:45)
+	at software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider.resolveCredentials(DefaultCredentialsProvider.java:123)
+	at software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder.resolveCredentials(AwsExecutionContextBuilder.java:184)
+	at software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder.invokeInterceptorsAndCreateExecutionContext(AwsExecutionContextBuilder.java:120)
+	at software.amazon.awssdk.awscore.client.handler.AwsSyncClientHandler.invokeInterceptorsAndCreateExecutionContext(AwsSyncClientHandler.java:69)
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.lambda$execute$1(BaseSyncClientHandler.java:78)
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.measureApiCallSuccess(BaseSyncClientHandler.java:175)
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.execute(BaseSyncClientHandler.java:76)
+	at software.amazon.awssdk.core.client.handler.SdkSyncClientHandler.execute(SdkSyncClientHandler.java:45)
+	at software.amazon.awssdk.awscore.client.handler.AwsSyncClientHandler.execute(AwsSyncClientHandler.java:56)
+	at software.amazon.awssdk.services.s3.DefaultS3Client.headObject(DefaultS3Client.java:5438)
+	at org.apache.iceberg.aws.s3.BaseS3File.getObjectMetadata(BaseS3File.java:85)
+	at org.apache.iceberg.aws.s3.BaseS3File.exists(BaseS3File.java:70)
+	at org.apache.iceberg.aws.s3.S3OutputFile.exists(S3OutputFile.java:32)
+	at org.apache.iceberg.aws.s3.S3OutputFile.create(S3OutputFile.java:60)
+	at org.apache.iceberg.TableMetadataParser.internalWrite(TableMetadataParser.java:124)
+	at org.apache.iceberg.TableMetadataParser.write(TableMetadataParser.java:118)
+	at org.apache.iceberg.hadoop.HadoopTableOperations.commit(HadoopTableOperations.java:155)
+	at org.apache.iceberg.BaseMetastoreCatalog$BaseMetastoreCatalogTableBuilder.create(BaseMetastoreCatalog.java:199)
+	at org.apache.iceberg.CachingCatalog$CachingTableBuilder.lambda$create$0(CachingCatalog.java:261)
+	at org.apache.iceberg.shaded.com.github.benmanes.caffeine.cache.BoundedLocalCache.lambda$doComputeIfAbsent$14(BoundedLocalCache.java:2406)
+	at java.base/java.util.concurrent.ConcurrentHashMap.compute(Unknown Source)
+	at org.apache.iceberg.shaded.com.github.benmanes.caffeine.cache.BoundedLocalCache.doComputeIfAbsent(BoundedLocalCache.java:2404)
+	at org.apache.iceberg.shaded.com.github.benmanes.caffeine.cache.BoundedLocalCache.computeIfAbsent(BoundedLocalCache.java:2387)
+	at org.apache.iceberg.shaded.com.github.benmanes.caffeine.cache.LocalCache.computeIfAbsent(LocalCache.java:108)
+	at org.apache.iceberg.shaded.com.github.benmanes.caffeine.cache.LocalManualCache.get(LocalManualCache.java:62)
+	at org.apache.iceberg.CachingCatalog$CachingTableBuilder.create(CachingCatalog.java:257)
+	at org.apache.iceberg.spark.SparkCatalog.createTable(SparkCatalog.java:236)
+	at org.apache.spark.sql.connector.catalog.TableCatalog.createTable(TableCatalog.java:200)
+	at org.apache.spark.sql.execution.datasources.v2.CreateTableExec.run(CreateTableExec.scala:44)
+	at org.apache.spark.sql.execution.datasources.v2.V2CommandExec.result$lzycompute(V2CommandExec.scala:43)
+	at org.apache.spark.sql.execution.datasources.v2.V2CommandExec.result(V2CommandExec.scala:43)
+	at org.apache.spark.sql.execution.datasources.v2.V2CommandExec.executeCollect(V2CommandExec.scala:49)
+	at org.apache.spark.sql.execution.QueryExecution$$anonfun$eagerlyExecuteCommands$1.$anonfun$applyOrElse$1(QueryExecution.scala:107)
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:125)
+	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:201)
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:108)
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:900)
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:66)
+	at org.apache.spark.sql.execution.QueryExecution$$anonfun$eagerlyExecuteCommands$1.applyOrElse(QueryExecution.scala:107)
+	at org.apache.spark.sql.execution.QueryExecution$$anonfun$eagerlyExecuteCommands$1.applyOrElse(QueryExecution.scala:98)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.$anonfun$transformDownWithPruning$1(TreeNode.scala:461)
+	at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(origin.scala:76)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.transformDownWithPruning(TreeNode.scala:461)
+	at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.org$apache$spark$sql$catalyst$plans$logical$AnalysisHelper$$super$transformDownWithPruning(LogicalPlan.scala:32)
+	at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.transformDownWithPruning(AnalysisHelper.scala:267)
+	at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.transformDownWithPruning$(AnalysisHelper.scala:263)
+	at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.transformDownWithPruning(LogicalPlan.scala:32)
+	at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.transformDownWithPruning(LogicalPlan.scala:32)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.transformDown(TreeNode.scala:437)
+	at org.apache.spark.sql.execution.QueryExecution.eagerlyExecuteCommands(QueryExecution.scala:98)
+	at org.apache.spark.sql.execution.QueryExecution.commandExecuted$lzycompute(QueryExecution.scala:85)
+	at org.apache.spark.sql.execution.QueryExecution.commandExecuted(QueryExecution.scala:83)
+	at org.apache.spark.sql.Dataset.<init>(Dataset.scala:220)
+	at org.apache.spark.sql.Dataset$.$anonfun$ofRows$2(Dataset.scala:100)
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:900)
+	at org.apache.spark.sql.Dataset$.ofRows(Dataset.scala:97)
+	at org.apache.spark.sql.SparkSession.$anonfun$sql$4(SparkSession.scala:691)
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:900)
+	at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:682)
+	at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:713)
+	at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:744)
+	at com.logging.consumer.StructuredLogConsumer.ensureTableExists(StructuredLogConsumer.java:244)
+	at com.logging.consumer.StructuredLogConsumer.processLogConfig(StructuredLogConsumer.java:139)
+	at com.logging.consumer.StructuredLogConsumer.main(StructuredLogConsumer.java:68)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.spark.deploy.JavaMainApplication.start(SparkApplication.scala:52)
+	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:1029)
+	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:194)
+	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:217)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:91)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1120)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1129)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Exception in thread "main" java.lang.RuntimeException: Failed to create table
+	at com.logging.consumer.StructuredLogConsumer.ensureTableExists(StructuredLogConsumer.java:249)
+	at com.logging.consumer.StructuredLogConsumer.processLogConfig(StructuredLogConsumer.java:139)
+	at com.logging.consumer.StructuredLogConsumer.main(StructuredLogConsumer.java:68)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.spark.deploy.JavaMainApplication.start(SparkApplication.scala:52)
+	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:1029)
+	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:194)
+	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:217)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:91)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1120)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1129)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: software.amazon.awssdk.core.exception.SdkClientException: Unable to load credentials from any of the providers in the chain AwsCredentialsProviderChain(credentialsProviders=[SystemPropertyCredentialsProvider(), EnvironmentVariableCredentialsProvider(), WebIdentityTokenCredentialsProvider(), ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(profiles=[])), ContainerCredentialsProvider(), InstanceProfileCredentialsProvider()]) : [SystemPropertyCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., EnvironmentVariableCredentialsProvider(): Unable to load credentials from system settings. Access key must be specified either via environment variable (AWS_ACCESS_KEY_ID) or system property (aws.accessKeyId)., WebIdentityTokenCredentialsProvider(): Either the environment variable AWS_WEB_IDENTITY_TOKEN_FILE or the javaproperty aws.webIdentityTokenFile must be set., ProfileCredentialsProvider(profileName=default, profileFile=ProfileFile(profiles=[])): Profile file contained no credentials for profile 'default': ProfileFile(profiles=[]), ContainerCredentialsProvider(): Cannot fetch credentials from container - neither AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI environment variables are set., InstanceProfileCredentialsProvider(): Failed to load credentials from IMDS.]
+	at software.amazon.awssdk.core.exception.SdkClientException$BuilderImpl.build(SdkClientException.java:102)
+	at software.amazon.awssdk.auth.credentials.AwsCredentialsProviderChain.resolveCredentials(AwsCredentialsProviderChain.java:117)
+	at software.amazon.awssdk.auth.credentials.internal.LazyAwsCredentialsProvider.resolveCredentials(LazyAwsCredentialsProvider.java:45)
+	at software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider.resolveCredentials(DefaultCredentialsProvider.java:123)
+	at software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder.resolveCredentials(AwsExecutionContextBuilder.java:184)
+	at software.amazon.awssdk.awscore.internal.AwsExecutionContextBuilder.invokeInterceptorsAndCreateExecutionContext(AwsExecutionContextBuilder.java:120)
+	at software.amazon.awssdk.awscore.client.handler.AwsSyncClientHandler.invokeInterceptorsAndCreateExecutionContext(AwsSyncClientHandler.java:69)
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.lambda$execute$1(BaseSyncClientHandler.java:78)
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.measureApiCallSuccess(BaseSyncClientHandler.java:175)
+	at software.amazon.awssdk.core.internal.handler.BaseSyncClientHandler.execute(BaseSyncClientHandler.java:76)
+	at software.amazon.awssdk.core.client.handler.SdkSyncClientHandler.execute(SdkSyncClientHandler.java:45)
+	at software.amazon.awssdk.awscore.client.handler.AwsSyncClientHandler.execute(AwsSyncClientHandler.java:56)
+	at software.amazon.awssdk.services.s3.DefaultS3Client.headObject(DefaultS3Client.java:5438)
+	at org.apache.iceberg.aws.s3.BaseS3File.getObjectMetadata(BaseS3File.java:85)
+	at org.apache.iceberg.aws.s3.BaseS3File.exists(BaseS3File.java:70)
+	at org.apache.iceberg.aws.s3.S3OutputFile.exists(S3OutputFile.java:32)
+	at org.apache.iceberg.aws.s3.S3OutputFile.create(S3OutputFile.java:60)
+	at org.apache.iceberg.TableMetadataParser.internalWrite(TableMetadataParser.java:124)
+	at org.apache.iceberg.TableMetadataParser.write(TableMetadataParser.java:118)
+	at org.apache.iceberg.hadoop.HadoopTableOperations.commit(HadoopTableOperations.java:155)
+	at org.apache.iceberg.BaseMetastoreCatalog$BaseMetastoreCatalogTableBuilder.create(BaseMetastoreCatalog.java:199)
+	at org.apache.iceberg.CachingCatalog$CachingTableBuilder.lambda$create$0(CachingCatalog.java:261)
+	at org.apache.iceberg.shaded.com.github.benmanes.caffeine.cache.BoundedLocalCache.lambda$doComputeIfAbsent$14(BoundedLocalCache.java:2406)
+	at java.base/java.util.concurrent.ConcurrentHashMap.compute(Unknown Source)
+	at org.apache.iceberg.shaded.com.github.benmanes.caffeine.cache.BoundedLocalCache.doComputeIfAbsent(BoundedLocalCache.java:2404)
+	at org.apache.iceberg.shaded.com.github.benmanes.caffeine.cache.BoundedLocalCache.computeIfAbsent(BoundedLocalCache.java:2387)
+	at org.apache.iceberg.shaded.com.github.benmanes.caffeine.cache.LocalCache.computeIfAbsent(LocalCache.java:108)
+	at org.apache.iceberg.shaded.com.github.benmanes.caffeine.cache.LocalManualCache.get(LocalManualCache.java:62)
+	at org.apache.iceberg.CachingCatalog$CachingTableBuilder.create(CachingCatalog.java:257)
+	at org.apache.iceberg.spark.SparkCatalog.createTable(SparkCatalog.java:236)
+	at org.apache.spark.sql.connector.catalog.TableCatalog.createTable(TableCatalog.java:200)
+	at org.apache.spark.sql.execution.datasources.v2.CreateTableExec.run(CreateTableExec.scala:44)
+	at org.apache.spark.sql.execution.datasources.v2.V2CommandExec.result$lzycompute(V2CommandExec.scala:43)
+	at org.apache.spark.sql.execution.datasources.v2.V2CommandExec.result(V2CommandExec.scala:43)
+	at org.apache.spark.sql.execution.datasources.v2.V2CommandExec.executeCollect(V2CommandExec.scala:49)
+	at org.apache.spark.sql.execution.QueryExecution$$anonfun$eagerlyExecuteCommands$1.$anonfun$applyOrElse$1(QueryExecution.scala:107)
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:125)
+	at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:201)
+	at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:108)
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:900)
+	at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:66)
+	at org.apache.spark.sql.execution.QueryExecution$$anonfun$eagerlyExecuteCommands$1.applyOrElse(QueryExecution.scala:107)
+	at org.apache.spark.sql.execution.QueryExecution$$anonfun$eagerlyExecuteCommands$1.applyOrElse(QueryExecution.scala:98)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.$anonfun$transformDownWithPruning$1(TreeNode.scala:461)
+	at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(origin.scala:76)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.transformDownWithPruning(TreeNode.scala:461)
+	at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.org$apache$spark$sql$catalyst$plans$logical$AnalysisHelper$$super$transformDownWithPruning(LogicalPlan.scala:32)
+	at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.transformDownWithPruning(AnalysisHelper.scala:267)
+	at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.transformDownWithPruning$(AnalysisHelper.scala:263)
+	at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.transformDownWithPruning(LogicalPlan.scala:32)
+	at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.transformDownWithPruning(LogicalPlan.scala:32)
+	at org.apache.spark.sql.catalyst.trees.TreeNode.transformDown(TreeNode.scala:437)
+	at org.apache.spark.sql.execution.QueryExecution.eagerlyExecuteCommands(QueryExecution.scala:98)
+	at org.apache.spark.sql.execution.QueryExecution.commandExecuted$lzycompute(QueryExecution.scala:85)
+	at org.apache.spark.sql.execution.QueryExecution.commandExecuted(QueryExecution.scala:83)
+	at org.apache.spark.sql.Dataset.<init>(Dataset.scala:220)
+	at org.apache.spark.sql.Dataset$.$anonfun$ofRows$2(Dataset.scala:100)
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:900)
+	at org.apache.spark.sql.Dataset$.ofRows(Dataset.scala:97)
+	at org.apache.spark.sql.SparkSession.$anonfun$sql$4(SparkSession.scala:691)
+	at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:900)
+	at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:682)
+	at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:713)
+	at org.apache.spark.sql.SparkSession.sql(SparkSession.scala:744)
+	at com.logging.consumer.StructuredLogConsumer.ensureTableExists(StructuredLogConsumer.java:244)
+	... 14 more

@@ -1,0 +1,160 @@
+:: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /home/spark/.ivy2/cache
+The jars for the packages stored in: /home/spark/.ivy2/jars
+org.apache.hadoop#hadoop-aws added as a dependency
+com.amazonaws#aws-java-sdk-bundle added as a dependency
+software.amazon.awssdk#bundle added as a dependency
+software.amazon.awssdk#url-connection-client added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-03185d76-89d1-4f61-a04c-14ae45e86040;1.0
+	confs: [default]
+	found org.apache.hadoop#hadoop-aws;3.3.4 in central
+	found com.amazonaws#aws-java-sdk-bundle;1.12.262 in central
+	found org.wildfly.openssl#wildfly-openssl;1.0.7.Final in central
+	found software.amazon.awssdk#bundle;2.17.257 in central
+	found software.amazon.eventstream#eventstream;1.0.1 in central
+	found software.amazon.awssdk#url-connection-client;2.17.257 in central
+	found software.amazon.awssdk#utils;2.17.257 in central
+	found org.reactivestreams#reactive-streams;1.0.3 in central
+	found software.amazon.awssdk#annotations;2.17.257 in central
+	found org.slf4j#slf4j-api;1.7.30 in central
+	found software.amazon.awssdk#http-client-spi;2.17.257 in central
+	found software.amazon.awssdk#metrics-spi;2.17.257 in central
+:: resolution report :: resolve 191ms :: artifacts dl 12ms
+	:: modules in use:
+	com.amazonaws#aws-java-sdk-bundle;1.12.262 from central in [default]
+	org.apache.hadoop#hadoop-aws;3.3.4 from central in [default]
+	org.reactivestreams#reactive-streams;1.0.3 from central in [default]
+	org.slf4j#slf4j-api;1.7.30 from central in [default]
+	org.wildfly.openssl#wildfly-openssl;1.0.7.Final from central in [default]
+	software.amazon.awssdk#annotations;2.17.257 from central in [default]
+	software.amazon.awssdk#bundle;2.17.257 from central in [default]
+	software.amazon.awssdk#http-client-spi;2.17.257 from central in [default]
+	software.amazon.awssdk#metrics-spi;2.17.257 from central in [default]
+	software.amazon.awssdk#url-connection-client;2.17.257 from central in [default]
+	software.amazon.awssdk#utils;2.17.257 from central in [default]
+	software.amazon.eventstream#eventstream;1.0.1 from central in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   12  |   0   |   0   |   0   ||   12  |   0   |
+	---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-03185d76-89d1-4f61-a04c-14ae45e86040
+	confs: [default]
+	0 artifacts copied, 12 already retrieved (0kB/4ms)
+25/11/25 19:51:56 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Loaded 2 log configurations
+25/11/25 19:51:56 INFO SparkContext: Running Spark version 3.5.0
+25/11/25 19:51:56 INFO SparkContext: OS info Linux, 6.6.96-0-virt, aarch64
+25/11/25 19:51:56 INFO SparkContext: Java version 11.0.20.1
+25/11/25 19:51:56 INFO ResourceUtils: ==============================================================
+25/11/25 19:51:56 INFO ResourceUtils: No custom resources configured for spark.driver.
+25/11/25 19:51:56 INFO ResourceUtils: ==============================================================
+25/11/25 19:51:56 INFO SparkContext: Submitted application: StructuredLogConsumer
+25/11/25 19:51:56 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+25/11/25 19:51:56 INFO ResourceProfile: Limiting resource is cpu
+25/11/25 19:51:56 INFO ResourceProfileManager: Added ResourceProfile id: 0
+25/11/25 19:51:56 INFO SecurityManager: Changing view acls to: spark
+25/11/25 19:51:56 INFO SecurityManager: Changing modify acls to: spark
+25/11/25 19:51:56 INFO SecurityManager: Changing view acls groups to: 
+25/11/25 19:51:56 INFO SecurityManager: Changing modify acls groups to: 
+25/11/25 19:51:56 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: spark; groups with view permissions: EMPTY; users with modify permissions: spark; groups with modify permissions: EMPTY
+25/11/25 19:51:56 INFO Utils: Successfully started service 'sparkDriver' on port 35749.
+25/11/25 19:51:56 INFO SparkEnv: Registering MapOutputTracker
+25/11/25 19:51:56 INFO SparkEnv: Registering BlockManagerMaster
+25/11/25 19:51:56 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+25/11/25 19:51:56 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+25/11/25 19:51:56 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+25/11/25 19:51:56 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-b6f074f6-7ddf-4eb6-aca5-2690b7272c52
+25/11/25 19:51:56 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+25/11/25 19:51:56 INFO SparkEnv: Registering OutputCommitCoordinator
+25/11/25 19:51:56 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+25/11/25 19:51:57 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+25/11/25 19:51:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar at spark://77a86cad8211:35749/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar at spark://77a86cad8211:35749/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.awssdk_bundle-2.17.257.jar at spark://77a86cad8211:35749/jars/software.amazon.awssdk_bundle-2.17.257.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.awssdk_url-connection-client-2.17.257.jar at spark://77a86cad8211:35749/jars/software.amazon.awssdk_url-connection-client-2.17.257.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar at spark://77a86cad8211:35749/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.eventstream_eventstream-1.0.1.jar at spark://77a86cad8211:35749/jars/software.amazon.eventstream_eventstream-1.0.1.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.awssdk_utils-2.17.257.jar at spark://77a86cad8211:35749/jars/software.amazon.awssdk_utils-2.17.257.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.awssdk_annotations-2.17.257.jar at spark://77a86cad8211:35749/jars/software.amazon.awssdk_annotations-2.17.257.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.awssdk_http-client-spi-2.17.257.jar at spark://77a86cad8211:35749/jars/software.amazon.awssdk_http-client-spi-2.17.257.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/org.reactivestreams_reactive-streams-1.0.3.jar at spark://77a86cad8211:35749/jars/org.reactivestreams_reactive-streams-1.0.3.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/org.slf4j_slf4j-api-1.7.30.jar at spark://77a86cad8211:35749/jars/org.slf4j_slf4j-api-1.7.30.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO SparkContext: Added JAR file:///home/spark/.ivy2/jars/software.amazon.awssdk_metrics-spi-2.17.257.jar at spark://77a86cad8211:35749/jars/software.amazon.awssdk_metrics-spi-2.17.257.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO SparkContext: Added JAR file:/opt/spark-apps-java/structured-log-consumer-1.0.0.jar at spark://77a86cad8211:35749/jars/structured-log-consumer-1.0.0.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO Executor: Starting executor ID driver on host 77a86cad8211
+25/11/25 19:51:57 INFO Executor: OS info Linux, 6.6.96-0-virt, aarch64
+25/11/25 19:51:57 INFO Executor: Java version 11.0.20.1
+25/11/25 19:51:57 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+25/11/25 19:51:57 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@656842bc for default.
+25/11/25 19:51:57 INFO Executor: Fetching spark://77a86cad8211:35749/jars/software.amazon.awssdk_metrics-spi-2.17.257.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO TransportClientFactory: Successfully created connection to 77a86cad8211/172.20.0.3:35749 after 24 ms (0 ms spent in bootstraps)
+25/11/25 19:51:57 INFO Utils: Fetching spark://77a86cad8211:35749/jars/software.amazon.awssdk_metrics-spi-2.17.257.jar to /tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/fetchFileTemp11814473531515269712.tmp
+25/11/25 19:51:57 INFO Executor: Adding file:/tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/software.amazon.awssdk_metrics-spi-2.17.257.jar to class loader default
+25/11/25 19:51:57 INFO Executor: Fetching spark://77a86cad8211:35749/jars/software.amazon.awssdk_bundle-2.17.257.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO Utils: Fetching spark://77a86cad8211:35749/jars/software.amazon.awssdk_bundle-2.17.257.jar to /tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/fetchFileTemp13857802650303305509.tmp
+25/11/25 19:51:57 INFO Executor: Adding file:/tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/software.amazon.awssdk_bundle-2.17.257.jar to class loader default
+25/11/25 19:51:57 INFO Executor: Fetching spark://77a86cad8211:35749/jars/software.amazon.awssdk_http-client-spi-2.17.257.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO Utils: Fetching spark://77a86cad8211:35749/jars/software.amazon.awssdk_http-client-spi-2.17.257.jar to /tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/fetchFileTemp11107312081029231061.tmp
+25/11/25 19:51:57 INFO Executor: Adding file:/tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/software.amazon.awssdk_http-client-spi-2.17.257.jar to class loader default
+25/11/25 19:51:57 INFO Executor: Fetching spark://77a86cad8211:35749/jars/structured-log-consumer-1.0.0.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO Utils: Fetching spark://77a86cad8211:35749/jars/structured-log-consumer-1.0.0.jar to /tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/fetchFileTemp18426542622090279263.tmp
+25/11/25 19:51:57 INFO Executor: Adding file:/tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/structured-log-consumer-1.0.0.jar to class loader default
+25/11/25 19:51:57 INFO Executor: Fetching spark://77a86cad8211:35749/jars/software.amazon.awssdk_utils-2.17.257.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO Utils: Fetching spark://77a86cad8211:35749/jars/software.amazon.awssdk_utils-2.17.257.jar to /tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/fetchFileTemp14622113041833721386.tmp
+25/11/25 19:51:57 INFO Executor: Adding file:/tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/software.amazon.awssdk_utils-2.17.257.jar to class loader default
+25/11/25 19:51:57 INFO Executor: Fetching spark://77a86cad8211:35749/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO Utils: Fetching spark://77a86cad8211:35749/jars/org.apache.hadoop_hadoop-aws-3.3.4.jar to /tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/fetchFileTemp1126158164242011336.tmp
+25/11/25 19:51:57 INFO Executor: Adding file:/tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/org.apache.hadoop_hadoop-aws-3.3.4.jar to class loader default
+25/11/25 19:51:57 INFO Executor: Fetching spark://77a86cad8211:35749/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO Utils: Fetching spark://77a86cad8211:35749/jars/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar to /tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/fetchFileTemp15744702896183073783.tmp
+25/11/25 19:51:57 INFO Executor: Adding file:/tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/org.wildfly.openssl_wildfly-openssl-1.0.7.Final.jar to class loader default
+25/11/25 19:51:57 INFO Executor: Fetching spark://77a86cad8211:35749/jars/software.amazon.awssdk_url-connection-client-2.17.257.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO Utils: Fetching spark://77a86cad8211:35749/jars/software.amazon.awssdk_url-connection-client-2.17.257.jar to /tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/fetchFileTemp10707581982700395450.tmp
+25/11/25 19:51:57 INFO Executor: Adding file:/tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/software.amazon.awssdk_url-connection-client-2.17.257.jar to class loader default
+25/11/25 19:51:57 INFO Executor: Fetching spark://77a86cad8211:35749/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO Utils: Fetching spark://77a86cad8211:35749/jars/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar to /tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/fetchFileTemp10583706836417048994.tmp
+25/11/25 19:51:57 INFO Executor: Adding file:/tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/com.amazonaws_aws-java-sdk-bundle-1.12.262.jar to class loader default
+25/11/25 19:51:57 INFO Executor: Fetching spark://77a86cad8211:35749/jars/org.reactivestreams_reactive-streams-1.0.3.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO Utils: Fetching spark://77a86cad8211:35749/jars/org.reactivestreams_reactive-streams-1.0.3.jar to /tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/fetchFileTemp10551803983977020657.tmp
+25/11/25 19:51:57 INFO Executor: Adding file:/tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/org.reactivestreams_reactive-streams-1.0.3.jar to class loader default
+25/11/25 19:51:57 INFO Executor: Fetching spark://77a86cad8211:35749/jars/software.amazon.awssdk_annotations-2.17.257.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO Utils: Fetching spark://77a86cad8211:35749/jars/software.amazon.awssdk_annotations-2.17.257.jar to /tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/fetchFileTemp8942552513915551484.tmp
+25/11/25 19:51:57 INFO Executor: Adding file:/tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/software.amazon.awssdk_annotations-2.17.257.jar to class loader default
+25/11/25 19:51:57 INFO Executor: Fetching spark://77a86cad8211:35749/jars/org.slf4j_slf4j-api-1.7.30.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO Utils: Fetching spark://77a86cad8211:35749/jars/org.slf4j_slf4j-api-1.7.30.jar to /tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/fetchFileTemp11256813566261165900.tmp
+25/11/25 19:51:57 INFO Executor: Adding file:/tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/org.slf4j_slf4j-api-1.7.30.jar to class loader default
+25/11/25 19:51:57 INFO Executor: Fetching spark://77a86cad8211:35749/jars/software.amazon.eventstream_eventstream-1.0.1.jar with timestamp 1764100316623
+25/11/25 19:51:57 INFO Utils: Fetching spark://77a86cad8211:35749/jars/software.amazon.eventstream_eventstream-1.0.1.jar to /tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/fetchFileTemp17981944011154069685.tmp
+25/11/25 19:51:57 INFO Executor: Adding file:/tmp/spark-6795b372-9d7a-4ebe-8f83-05fcdf0e25b8/userFiles-d9be6bd0-7e4e-4f92-824c-a37b033225bb/software.amazon.eventstream_eventstream-1.0.1.jar to class loader default
+25/11/25 19:51:57 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 38543.
+25/11/25 19:51:57 INFO NettyBlockTransferService: Server created on 77a86cad8211:38543
+25/11/25 19:51:57 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+25/11/25 19:51:57 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 77a86cad8211, 38543, None)
+25/11/25 19:51:57 INFO BlockManagerMasterEndpoint: Registering block manager 77a86cad8211:38543 with 434.4 MiB RAM, BlockManagerId(driver, 77a86cad8211, 38543, None)
+25/11/25 19:51:57 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 77a86cad8211, 38543, None)
+25/11/25 19:51:57 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 77a86cad8211, 38543, None)
+Processing log config: ApiMetrics -> analytics_logs.api_metrics
+Creating database if not exists: local.analytics_logs
+Creating Iceberg table: local.analytics_logs.api_metrics
+Executing: CREATE TABLE IF NOT EXISTS local.analytics_logs.api_metrics (timestamp TIMESTAMP, metric_date DATE, service_name STRING, endpoint STRING, method STRING, status_code INT, response_time_ms LONG, request_size_bytes LONG, response_size_bytes LONG, user_id STRING, client_ip STRING, error_message STRING, _ingestion_timestamp TIMESTAMP, _ingestion_date DATE) USING iceberg PARTITIONED BY (metric_date, service_name) TBLPROPERTIES ('write.format.default'='parquet', 'write.parquet.compression-codec'='snappy', 'write.metadata.compression-codec'='gzip', 'sort.order'='timestamp, endpoint')
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+✓ Table ready: local.analytics_logs.api_metrics
+Writing to Iceberg table: local.analytics_logs.api_metrics
+25/11/25 19:52:00 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
+25/11/25 19:52:00 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+Started streaming query for ApiMetrics
+Processing log config: UserEvents -> analytics_logs.user_events
+Creating database if not exists: local.analytics_logs
+Creating Iceberg table: local.analytics_logs.user_events
+Executing: CREATE TABLE IF NOT EXISTS local.analytics_logs.user_events (timestamp TIMESTAMP, event_date DATE, user_id STRING, session_id STRING, event_type STRING, page_url STRING, properties MAP<STRING, STRING>, device_type STRING, duration_ms LONG, _ingestion_timestamp TIMESTAMP, _ingestion_date DATE) USING iceberg PARTITIONED BY (event_date, event_type) TBLPROPERTIES ('write.format.default'='parquet', 'write.parquet.compression-codec'='snappy', 'write.metadata.compression-codec'='gzip', 'sort.order'='timestamp, user_id')
+25/11/25 19:52:01 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+✓ Table ready: local.analytics_logs.user_events
+Writing to Iceberg table: local.analytics_logs.user_events
+25/11/25 19:52:01 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+Started streaming query for UserEvents
+Started 2 streaming queries
+25/11/25 19:52:01 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.

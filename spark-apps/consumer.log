@@ -1,0 +1,66 @@
+Loaded 2 log configurations
+25/11/25 19:15:55 INFO SparkContext: Running Spark version 3.5.0
+25/11/25 19:15:55 INFO SparkContext: OS info Linux, 6.6.96-0-virt, aarch64
+25/11/25 19:15:55 INFO SparkContext: Java version 11.0.20.1
+25/11/25 19:15:55 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/11/25 19:15:55 INFO ResourceUtils: ==============================================================
+25/11/25 19:15:55 INFO ResourceUtils: No custom resources configured for spark.driver.
+25/11/25 19:15:55 INFO ResourceUtils: ==============================================================
+25/11/25 19:15:55 INFO SparkContext: Submitted application: StructuredLogConsumer
+25/11/25 19:15:55 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+25/11/25 19:15:55 INFO ResourceProfile: Limiting resource is cpu
+25/11/25 19:15:55 INFO ResourceProfileManager: Added ResourceProfile id: 0
+25/11/25 19:15:55 INFO SecurityManager: Changing view acls to: spark
+25/11/25 19:15:55 INFO SecurityManager: Changing modify acls to: spark
+25/11/25 19:15:55 INFO SecurityManager: Changing view acls groups to: 
+25/11/25 19:15:55 INFO SecurityManager: Changing modify acls groups to: 
+25/11/25 19:15:55 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: spark; groups with view permissions: EMPTY; users with modify permissions: spark; groups with modify permissions: EMPTY
+25/11/25 19:15:56 INFO Utils: Successfully started service 'sparkDriver' on port 43667.
+25/11/25 19:15:56 INFO SparkEnv: Registering MapOutputTracker
+25/11/25 19:15:56 INFO SparkEnv: Registering BlockManagerMaster
+25/11/25 19:15:56 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+25/11/25 19:15:56 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+25/11/25 19:15:56 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+25/11/25 19:15:56 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-baffa7bd-f1c1-437b-b4b4-5eaeb394ad6a
+25/11/25 19:15:56 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+25/11/25 19:15:56 INFO SparkEnv: Registering OutputCommitCoordinator
+25/11/25 19:15:56 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+25/11/25 19:15:56 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+25/11/25 19:15:56 INFO SparkContext: Added JAR file:/opt/spark-apps/structured-log-consumer-1.0.0.jar at spark://77a86cad8211:43667/jars/structured-log-consumer-1.0.0.jar with timestamp 1764098155842
+25/11/25 19:15:56 INFO Executor: Starting executor ID driver on host 77a86cad8211
+25/11/25 19:15:56 INFO Executor: OS info Linux, 6.6.96-0-virt, aarch64
+25/11/25 19:15:56 INFO Executor: Java version 11.0.20.1
+25/11/25 19:15:56 INFO Executor: Starting executor with user classpath (userClassPathFirst = false): ''
+25/11/25 19:15:56 INFO Executor: Created or updated repl class loader org.apache.spark.util.MutableURLClassLoader@2fbe26da for default.
+25/11/25 19:15:56 INFO Executor: Fetching spark://77a86cad8211:43667/jars/structured-log-consumer-1.0.0.jar with timestamp 1764098155842
+25/11/25 19:15:56 INFO TransportClientFactory: Successfully created connection to 77a86cad8211/172.20.0.3:43667 after 17 ms (0 ms spent in bootstraps)
+25/11/25 19:15:56 INFO Utils: Fetching spark://77a86cad8211:43667/jars/structured-log-consumer-1.0.0.jar to /tmp/spark-cdf7e084-1963-4ccb-af62-41773479ba29/userFiles-c67b0dcb-5154-4793-85ef-8a51dd073a4c/fetchFileTemp10291266681083144303.tmp
+25/11/25 19:15:56 INFO Executor: Adding file:/tmp/spark-cdf7e084-1963-4ccb-af62-41773479ba29/userFiles-c67b0dcb-5154-4793-85ef-8a51dd073a4c/structured-log-consumer-1.0.0.jar to class loader default
+25/11/25 19:15:56 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 40107.
+25/11/25 19:15:56 INFO NettyBlockTransferService: Server created on 77a86cad8211:40107
+25/11/25 19:15:56 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+25/11/25 19:15:56 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 77a86cad8211, 40107, None)
+25/11/25 19:15:56 INFO BlockManagerMasterEndpoint: Registering block manager 77a86cad8211:40107 with 434.4 MiB RAM, BlockManagerId(driver, 77a86cad8211, 40107, None)
+25/11/25 19:15:56 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 77a86cad8211, 40107, None)
+25/11/25 19:15:56 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 77a86cad8211, 40107, None)
+Processing log config: ApiMetrics -> analytics.logs.api_metrics
+Creating database if not exists: local.analytics
+Creating schema if not exists: local.analytics.logs
+Creating Iceberg table: local.analytics.logs.api_metrics
+Executing: CREATE TABLE IF NOT EXISTS local.analytics.logs.api_metrics (timestamp TIMESTAMP, metric_date DATE, service_name STRING, endpoint STRING, method STRING, status_code INT, response_time_ms LONG, request_size_bytes LONG, response_size_bytes LONG, user_id STRING, client_ip STRING, error_message STRING, _ingestion_timestamp TIMESTAMP, _ingestion_date DATE) USING iceberg PARTITIONED BY (metric_date, service_name) TBLPROPERTIES ('write.format.default'='parquet', 'write.parquet.compression-codec'='snappy', 'write.metadata.compression-codec'='gzip', 'sort.order'='timestamp, endpoint')
+✓ Table ready: local.analytics.logs.api_metrics
+Writing to Iceberg table: local.analytics.logs.api_metrics
+25/11/25 19:15:57 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+Started streaming query for ApiMetrics
+Processing log config: UserEvents -> analytics.logs.user_events
+Creating database if not exists: local.analytics
+Creating schema if not exists: local.analytics.logs
+Creating Iceberg table: local.analytics.logs.user_events
+Executing: CREATE TABLE IF NOT EXISTS local.analytics.logs.user_events (timestamp TIMESTAMP, event_date DATE, user_id STRING, session_id STRING, event_type STRING, page_url STRING, properties MAP<STRING, STRING>, device_type STRING, duration_ms LONG, _ingestion_timestamp TIMESTAMP, _ingestion_date DATE) USING iceberg PARTITIONED BY (event_date, event_type) TBLPROPERTIES ('write.format.default'='parquet', 'write.parquet.compression-codec'='snappy', 'write.metadata.compression-codec'='gzip', 'sort.order'='timestamp, user_id')
+✓ Table ready: local.analytics.logs.user_events
+Writing to Iceberg table: local.analytics.logs.user_events
+25/11/25 19:15:58 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+25/11/25 19:15:58 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+Started streaming query for UserEvents
+Started 2 streaming queries
+25/11/25 19:15:58 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
