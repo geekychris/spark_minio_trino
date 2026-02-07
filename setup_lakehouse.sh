@@ -28,7 +28,7 @@ echo ""
 
 # Start services
 echo "Starting services with Docker Compose..."
-docker-compose up -d
+docker compose up -d
 
 echo ""
 echo "Waiting for services to be ready..."
@@ -37,7 +37,7 @@ sleep 10
 # Check service health
 echo ""
 echo "Checking service status..."
-docker-compose ps
+docker compose ps
 
 echo ""
 echo "=========================================="
