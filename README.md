@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.png" alt="Spark Minio Trino logo" width="180">
+</p>
+
 # Data Lakehouse Demo
 
 ## TL;DR
